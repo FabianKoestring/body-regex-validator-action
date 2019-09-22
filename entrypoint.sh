@@ -62,6 +62,18 @@ sendComment() {
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}/comments"
 }
 
+closeIssue() {
+    local GITHUB_ISSUE_NUMBER="$1"
+
+    curl -sSL \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Accept: application/vnd.github.v3+json" \
+         -X POST \
+         -H "Content-Type: application/json" \
+         -d "{\"state\":\"closed\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${GITHUB_ISSUE_NUMBER}"
+}
+
 main() {
     GITHUB_EVENT_ACTION=$(jq --raw-output .action "$GITHUB_EVENT_PATH")
 
@@ -75,6 +87,7 @@ main() {
             sendReaction "$GITHUB_PULL_REQUEST_EVENT_NUMBER"
         else
             sendComment "$GITHUB_PULL_REQUEST_EVENT_NUMBER" "$PULL_REQUEST_COMMENT"
+            closeIssue "$GITHUB_PULL_REQUEST_EVENT_NUMBER"
         fi
     fi
 
@@ -88,6 +101,7 @@ main() {
             sendReaction "$GITHUB_ISSUE_EVENT_NUMBER"
         else
             sendComment "$GITHUB_ISSUE_EVENT_NUMBER" "$ISSUE_COMMENT"
+            closeIssue "$GITHUB_ISSUE_EVENT_NUMBER"
         fi
     fi
     exit 0
