@@ -80,7 +80,7 @@ main() {
 
     # handle issues
     if [[ "$GITHUB_EVENT_NAME" == "issues" && "$GITHUB_EVENT_ACTION" == "opened" ]]; then
-        GITHUB_ISSUE_EVENT_NUMBER=$(jq --raw-output .issue.body "$GITHUB_EVENT_PATH")
+        GITHUB_ISSUE_EVENT_NUMBER=$(jq --raw-output .issue.number "$GITHUB_EVENT_PATH")
         GITHUB_ISSUE_EVENT_BODY=$(jq --raw-output .issue.body "$GITHUB_EVENT_PATH")
 
         if [[ "$GITHUB_ISSUE_EVENT_BODY" =~ $ISSUE_PATTERN ]]
