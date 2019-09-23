@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 LABEL "com.github.actions.name"="Issue / Pull request body regex validator"
-LABEL "com.github.actions.description"="This Action checks issue and pr descriptions against an regular expression. Can be used to check if description met your template files."
+LABEL "com.github.actions.description"="This Action checks issue and pr descriptions against an regular expression."
 LABEL "com.github.actions.icon"="message-square"
 LABEL "com.github.actions.color"="gray-dark"
 
