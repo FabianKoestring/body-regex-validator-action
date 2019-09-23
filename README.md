@@ -25,8 +25,6 @@ jobs:
         ISSUE_PATTERN: '^(.*Description.*Behavior.*)$'
         ISSUE_COMMENT: 'This is my issue comment template.'
 ```
-## Demo
-
 
 ## License
 The Dockerfile and associated scripts and documentation in this project are released under the [GNU General Public License v3.0](LICENSE).
